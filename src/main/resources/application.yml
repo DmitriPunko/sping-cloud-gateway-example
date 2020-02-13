@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: test-route
+          uri: https://expired.badssl.com/
+          predicates:
+            - Path=/testRoute**
+          filters:
+            - RewritePath=/testRoute(?<segment>.*), /$\{segment}
